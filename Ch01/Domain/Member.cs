@@ -12,7 +12,7 @@ public class Member
     public DateTime JoinedAt { get; private set; }
     public MemberStatus Status { get; private set; }
 
-    private Member(string name, string email)
+    private Member(string name, string email, string studentCode)
     {
         Id = Guid.NewGuid();
         Name = name;
