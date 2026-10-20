@@ -1,3 +1,7 @@
+using EduHub.Ch02.Logging;
+
+namespace EduHub.Ch02.Logging.Impl;
+
 public class FileLoggerImpl : IAppLogger
 {
     private readonly string _path;

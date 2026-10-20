@@ -1,5 +1,9 @@
+using EduHub.Ch02.Enum;
+using EduHub.Ch02.Services;
+
 namespace EduHub.Ch02.Services.Impl;
-public class NotificationServiceFactoryImpl : INotificationServiceFactory
+
+public sealed class NotificationServiceFactoryImpl : INotificationServiceFactory
 {
     public INotificationService Create (NotificationChannel channel) => channel switch
     {
