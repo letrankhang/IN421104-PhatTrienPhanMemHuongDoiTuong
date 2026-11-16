@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ── Đăng ký services (Dependency Injection) ──────────────────────────────
 // TODO 6a: đăng ký IClubRepository → InMemoryClubRepository (AddScoped)
+builder.Services.AddScoped<IClubRepository, InMemoryClubRepository>();
 // TODO 6b: đăng ký IMemberRepository → InMemoryMemberRepository (AddScoped)
 // TODO 6c: đăng ký 4 handler: GetClubsQueryHandler, GetClubByIdQueryHandler,
 //          CreateClubCommandHandler, DeleteClubCommandHandler (AddScoped)

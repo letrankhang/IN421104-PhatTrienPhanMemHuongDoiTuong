@@ -14,9 +14,8 @@ public class GetClubByIdQueryHandler
         _repository = repository;
     }
 
-    public Task<Club?> HandleAsync(GetClubByIdQuery query, CancellationToken ct = default)
+    public async Task<Club?> HandleAsync(GetClubByIdQuery query, CancellationToken ct = default)
     {
-        // TODO 3: gọi _repository.GetByIdAsync; trả null nếu không có club
-        throw new NotImplementedException();
+       return await _repository.GetByIdAsync(query.Id, ct);
     }
 }

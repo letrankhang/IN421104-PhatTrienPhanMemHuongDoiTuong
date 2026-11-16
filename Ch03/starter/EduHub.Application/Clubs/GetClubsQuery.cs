@@ -14,9 +14,10 @@ public class GetClubsQueryHandler
         _repository = repository;
     }
 
-    public Task<IEnumerable<Club>> HandleAsync(GetClubsQuery query, CancellationToken ct = default)
+    public async Task<IEnumerable<Club>> HandleAsync(GetClubsQuery query, CancellationToken ct = default)
     {
         // TODO 2: gọi _repository.GetAllAsync(ct) và trả kết quả
-        throw new NotImplementedException();
+        var clubs =  await _repository.GetAllAsync(ct);
+        return clubs;
     }
 }

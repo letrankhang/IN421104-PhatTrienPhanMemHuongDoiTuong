@@ -32,22 +32,25 @@ public class ClubsController : ControllerBase
     /// <summary>Lấy danh sách câu lạc bộ.</summary>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<Club>), StatusCodes.Status200OK)]
-    public Task<IActionResult> GetAll(CancellationToken ct)
+    public async Task<IActionResult> GetAll(CancellationToken ct)
     {
+
         // TODO 8a: gọi _getClubsHandler.HandleAsync(new GetClubsQuery(), ct)
         // TODO 8b: trả Ok(clubs) → 200
-        throw new NotImplementedException();
+        var clubs = await _getClubsHandler.HandleAsync(new GetClubsQuery(), ct);
+        return Ok(clubs);
     }
 
     /// <summary>Lấy một câu lạc bộ theo Id.</summary>
     [HttpGet("{id:guid}")]
     [ProducesResponseType(typeof(Club), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public Task<IActionResult> GetById(Guid id, CancellationToken ct)
+    public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
     {
         // TODO 8c: gọi _getClubByIdHandler.HandleAsync(new GetClubByIdQuery(id), ct)
         // TODO 8d: không có club → NotFound() (404); có → Ok(club) (200)
-        throw new NotImplementedException();
+        var club = await _getClubByIdHandler.HandleAsync(new GetClubByIdQuery(id), ct);
+        return club is null ? NotFound() : Ok(club);
     }
 
     /// <summary>Tạo câu lạc bộ mới.</summary>
