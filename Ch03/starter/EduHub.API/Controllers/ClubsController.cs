@@ -73,11 +73,17 @@ public class ClubsController : ControllerBase
     [HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public Task<IActionResult> Delete(Guid id, CancellationToken ct)
+    public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
     {
-        // TODO 8h: gọi _deleteClubHandler.HandleAsync(new DeleteClubCommand(id), ct) → NoContent() (204)
-        // TODO 8i: bắt KeyNotFoundException → NotFound() (404)
-        throw new NotImplementedException();
+         try
+        {
+            await _deleteClubHandler.HandleAsync(new DeleteClubCommand(id), ct);
+            return NoContent();
+        }
+        catch (KeyNotFoundException)
+        {
+            return NotFound();
+        }
     }
 }
 

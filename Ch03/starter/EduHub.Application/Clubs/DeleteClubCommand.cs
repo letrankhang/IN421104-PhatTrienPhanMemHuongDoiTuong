@@ -13,10 +13,10 @@ public class DeleteClubCommandHandler
         _repository = repository;
     }
 
-    public Task HandleAsync(DeleteClubCommand command, CancellationToken ct = default)
+    public async Task HandleAsync(DeleteClubCommand command, CancellationToken ct = default)
     {
+        await _repository.DeleteAsync(command.Id, ct);
         // TODO 5: gọi _repository.DeleteAsync(command.Id, ct)
         //         (repository sẽ throw KeyNotFoundException nếu không có club)
-        throw new NotImplementedException();
     }
 }
