@@ -57,12 +57,16 @@ public class ClubsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(Club), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public Task<IActionResult> Create([FromBody] CreateClubRequest request, CancellationToken ct)
+    public async Task<IActionResult> Create([FromBody] CreateClubRequest request, CancellationToken ct)
     {
-        // TODO 8e: đổi request thành CreateClubCommand, gọi _createClubHandler.HandleAsync(command, ct)
-        // TODO 8f: thành công → CreatedAtAction(nameof(GetById), new { id = club.Id }, club) (201 + Location)
-        // TODO 8g: bắt ArgumentException → BadRequest(new { message = ex.Message }) (400)
-        throw new NotImplementedException();
+        try
+        {
+            var club = await _createClubHandler.HandleAsync(new CreateClubCommand(request.Name, request.Description), ct);
+            return CreatedAtAction(nameof(GetById), new { id = club.Id }, club);
+        } catch (ArgumentException ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
 
     /// <summary>Xoá một câu lạc bộ.</summary>
